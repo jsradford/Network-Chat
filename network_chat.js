@@ -31,12 +31,10 @@ function setupChatChannels(dictChatMatrix) {
     
     //get the number of channels to figure out how many to create in the interface
     var curMaxChannel = 1;
-    for (var participant in chat_channel_matrix) {          //for each participant
-        dictChatChannelMatrix[participant] = [];
-        var tempArr = dictToParse[participant]; 
+    for (var participant in dictChatMatrix) {          //for each participant
+        var tempArr = dictChatMatrix[participant]; 
         for (var i = 0; i < tempArr.length; i++) {  // for each channel the person is on
             var val = tempArr[i];
-            dictChatChannelMatrix[participant].push(parseInt(val)); //add the channel to the participant
             if (val > curMaxChannel) {
                 curMaxChannel = val;
             }
@@ -44,8 +42,8 @@ function setupChatChannels(dictChatMatrix) {
     }
     chat_channel_count = curMaxChannel;
 
-    var colCount = Math.ceil(channelCount / chat_max_channels_per_column);
-    var channelsPerCol = Math.ceil(channelCount / colCount);
+    var colCount = Math.ceil(chat_channel_count / chat_max_channels_per_column);
+    var channelsPerCol = Math.ceil(chat_channel_count / colCount);
     
     var divChatChannels = $('#divChatChannels');
     divChatChannels.empty();
@@ -143,7 +141,7 @@ function setupChatChannels(dictChatMatrix) {
       //$('#divOpenChat').show(500);
     });
 
-    $('#' + chatWindowsId).append(divChatWindow);
+    $('#divChatWindows').append(divChatWindow);
   }
 
 
